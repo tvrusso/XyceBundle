@@ -1,6 +1,6 @@
 [submodule "trilinos"]
 	path = trilinos
-	url = https://github.com/trilinos/trilinos
+	url = https://github.com/trilinos/trilinos.git
 	branch = trilinos-release-12-12-branch
 [submodule "Xyce"]
 	path = Xyce
