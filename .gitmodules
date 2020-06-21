@@ -1,0 +1,10 @@
+[submodule "trilinos"]
+	path = trilinos
+	url = https://github.com/trilinos/trilinos
+	branch = trilinos-release-12-12-branch
+[submodule "Xyce"]
+	path = Xyce
+	url = https://github.com/Xyce/Xyce
+[submodule "Xyce_Regression"]
+	path = Xyce_Regression
+	url = https://github.com/Xyce/Xyce_Regression

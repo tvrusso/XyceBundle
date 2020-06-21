@@ -1,0 +1,58 @@
+#!/bin/sh -e
+if [ $# -ge 1 ]
+then
+    TOPDIR=$1
+else
+    TOPDIR=`pwd`
+fi
+
+if [ ! -e $TOPDIR/Build_And_Install_Trilinos ]
+then
+    echo "Cannot find Build_And_Install_Trilinos in $TOPDIR.  Please either"
+    echo "run this script from the directory in which it exists, or provide"
+    echo "the path to your XyceBundle clone as the first argument."
+    exit 1
+fi
+
+echo "This script will try to build and test Xyce for your system,"
+echo "which uname reports as "`uname`
+
+NUMPROC=8
+
+read -p "Script is set up to use $NUMPROC cores.  Control-C if this is more than your system has and edit NUMPROC to something smaller.  Hit any other key to continue with this " FOOBAR
+
+
+if [ ! -e $TOPDIR/XyceLibs/`uname`_serial ]
+then
+   echo "Cannot find directory of Trilinos libraries.  Building those."
+   $TOPDIR/Build_And_Install_Trilinos $TOPDIR
+fi
+
+if [ ! -x $TOPDIR/Xyce/configure ]
+then
+    echo "Configure script not found in Xyce source.  Bootstrapping..."
+    SAVEDIR=`pwd`
+    cd $TOPDIR/Xyce
+    ./bootstrap
+    cd $SAVEDIR
+    echo "Bootstrap done."
+fi
+
+if [ -x $TOPDIR/xyce_reconfigures/reconfigure.xyce.`uname`_serial ]
+then
+    mkdir -p Xyce_Builddir_`uname`_serial
+    cd Xyce_Builddir_`uname`_serial
+    $TOPDIR/xyce_reconfigures/reconfigure.xyce.`uname`_serial $TOPDIR
+    make -j${NUMPROC}
+    $TOPDIR/Xyce_Regression/TestScripts/run_xyce_regressionMP \
+        --numproc=${NUMPROC} \
+        --output=`pwd`/Xyce_Test --xyce_test=$TOPDIR/Xyce_Regression \
+        --taglist="+serial+nightly?noverbose?klu-verbose?fft?cxx11" \
+        `pwd`/src/Xyce
+else
+    echo "No reconfigure.xyce."`uname`"_serial  was found."
+    echo "Please copy $TOPDIR/xyce_reconfigures/reconfigure.xyce.sample to $TOPDIR/xyce_reconfigures/reconfigure.xyce."`uname`"_serial"
+    echo ", customize it, make it executable with "
+    echo "        chmod u+x  $TOPDIR/xyce_reconfigures/reconfigure.xyce."`uname`"_serial"
+    echo "and try again."
+fi
