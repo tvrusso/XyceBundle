@@ -1,0 +1,22 @@
+#!/bin/sh
+
+#This script is assuming that the first argument is the top level directory
+# if given, or that XyceBundle lives in the home directory.  Edit as needed.
+if [ $# -ge 1 ]
+then
+  TOPDIR=$1
+else
+  TOPDIR=$HOME/XyceBundle
+fi
+
+MYSYSTEM=`uname`
+
+$TOPDIR/Xyce/configure \
+--prefix=$TOPDIR/Xyce_Installs/${MYSYSTEM}_Serial \
+CXXFLAGS="-O3 -g -std=c++11" \
+CPPFLAGS="-I/usr/include/suitesparse" \
+ARCHDIR=$TOPDIR/XyceLibs/${MYSYSTEM}_serial \
+CXX="g++" CC="gcc" F77="gfortran" \
+--enable-shared \
+--enable-xyce-shareable
+

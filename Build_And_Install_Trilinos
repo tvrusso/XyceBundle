@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/sh -e
+
 if [ $# -ge 1 ]
 then
     TOPDIR=$1
