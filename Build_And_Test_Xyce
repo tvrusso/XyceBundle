@@ -28,15 +28,13 @@ then
    $TOPDIR/Build_And_Install_Trilinos $TOPDIR
 fi
 
-if [ ! -x $TOPDIR/Xyce/configure ]
-then
-    echo "Configure script not found in Xyce source.  Bootstrapping..."
+# Always bootstrap.  Something might have changed
     SAVEDIR=`pwd`
     cd $TOPDIR/Xyce
     ./bootstrap
     cd $SAVEDIR
     echo "Bootstrap done."
-fi
+
 
 if [ -x $TOPDIR/xyce_reconfigures/reconfigure.xyce.`uname`_serial ]
 then
