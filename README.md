@@ -139,7 +139,20 @@ Xyce and Xyce_Regression are generally updated on github once a week,
 and you can use this repo to stay current.
 
 Simply run the command "git pull --recurse-submodules" in the top level
-directory of your clone, and all submodules should be updated.
+directory of your clone, and all submodules should be fetched.  You should
+then do
+```
+for i in Xyce Xyce_Regression
+do
+  pushd $i
+  git merge
+  popd
+done
+```
+
+This will assure that you will get the latest Xyce and
+Xyce_Regression, even if I've neglected to push the submodule update
+myself.
 
 At this time, the Xyce team recommends a specific, somewhat old
 version of Trilinos, and this repo is set up to check that specific
