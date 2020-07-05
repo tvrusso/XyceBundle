@@ -15,8 +15,18 @@ then
 elif [ -f "`which port`"]
 then
   echo "I think you have macports, but I don't know what to do with that."
-  echo "Please help me fill this in."
+  echo "Please help me fill this in.  Edit reconfigure.xyce.Darwin_serial"
+  echo "and correct the settings, then remove this message and the exit"
   exit 1
+  # these are guesses based on building guide
+  # FIX THEM and remove echos and exit above
+  CC="gcc-mp-10"
+  CXX="g++-mp-10"
+  F77="gfortran-mp-10"
+  LDFLAGS="-Wl,-framework,Accelerate -L/opt/local/lib"
+  CPPFLAGS="-I/opt/local/include"
+  LEX=""   # let configure find its own
+  BISON="" # let configure find its own
 else
   echo "I do not know what package manager you are using and am not set up"
   echo "for anything but homebrew yet.  Please consider helping to improve this setup"
