@@ -25,19 +25,21 @@ are needed to build these tools, all of which may be obtained from the
 system package management repositories on all of the systems we have
 tried to use.
 
-Please see the building guide for system-specific guidance on what
-packages to install before trying to run anything in this repo.
+Please see the
+[Xyce Building Guide](https://xyce.sandia.gov/documentation/BuildingGuide.html)
+for system-specific guidance on what packages to install before trying to run
+anything in this repo.
 
 ## Using this repo
 
-  * Clone the repo from github and change to its directory
-    with "git clone --recurse-submodules".  Note that Trilinos is enormous
-    and cloning this submodule will take time and disk space.
+  * Clone the repo from GitHub using `git clone --recurse-submodules` and
+    change to its directory.  Note that Trilinos is enormous and cloning this
+    submodule will take time and disk space.
 
 
-  * If you forgot to use the "--recurse-submodules" when you cloned
-    this repo, get the submodules now with "git submodule update
-    --init --recursive".
+  * If you forgot to use the `--recurse-submodules` when you cloned
+    this repo, get the submodules now with `git submodule update
+    --init --recursive`.
 
   * If I haven't provided a system-specific configuration for your system,
     you'll have to customize the samples I have provided.
@@ -135,7 +137,7 @@ by the value returned by running `uname` on your system.)
 
 ## Updating your bundle
 
-Xyce and Xyce_Regression are generally updated on github once a week,
+Xyce and Xyce_Regression are generally updated on GitHub once a week,
 and you can use this repo to stay current.
 
 Simply run the command "git pull --recurse-submodules" in the top level

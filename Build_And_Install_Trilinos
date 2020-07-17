@@ -20,7 +20,10 @@ echo "which uname reports as "`uname`
 
 NUMPROC=8
 
-read -p "Script is set up to use $NUMPROC cores.  Control-C if this is more than your system has and edit NUMPROC to something smaller.  Hit ENTER to continue with this " FOOBAR
+echo "Script is set up to use $NUMPROC cores."
+echo "Press Control-C if this is more than your system has and edit NUMPROC to"
+read -p "something smaller; or, hit ENTER to continue with the installation." FOOBAR
+
 
 if [ -x $TOPDIR/trilinos_reconfigures/reconfigure.trilinos.`uname`_serial ]
 then
