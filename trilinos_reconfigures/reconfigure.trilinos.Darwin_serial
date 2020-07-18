@@ -10,22 +10,18 @@ then
   F77="gfortran-10"
   AMDINCS="/usr/local/include"
   AMDLIBS="/usr/local/lib"
-elif [ -f "`which port`"]
+elif [ -f "`which port`" ]
 then
-  echo "I think you have macports, but I don't know what to do with that."
-  echo "Please help me fill this in.  Edit reconfigure.xyce.Darwin_serial"
-  echo "and correct the settings, then remove this message and the exit"
-  exit 1
-  # these are guesses based on building guide
-  # FIX THEM and remove echos and exit above
+  echo "I think you have MacPorts installed and so am setting up to use"
+  echo "third party libraries provided by that system."
   CC="gcc-mp-10"
   CXX="g++-mp-10"
   F77="gfortran-mp-10"
   AMDINCS="/opt/local/include"
   AMDLIBS="/opt/local/lib"
 else
-  echo "I do not know what package manager you are using and am not set up"
-  echo "for anything but homebrew yet.  Please consider helping to improve this setup"
+  echo "I do not know what package manager you are using."
+  echo "Please consider helping to improve this setup."
   exit 1
 fi
 
