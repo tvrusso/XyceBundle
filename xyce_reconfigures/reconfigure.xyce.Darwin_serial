@@ -43,6 +43,7 @@ MYSYSTEM=`uname`
 $TOPDIR/Xyce/configure \
 --prefix=$TOPDIR/Xyce_Installs/${MYSYSTEM}_Serial \
 CXXFLAGS="-O3 -g -std=c++11" \
+CFLAGS="-O3 -g" \
 LDFLAGS="$LDFLAGS" \
 CPPFLAGS="$CPPFLAGS" \
 LEX="$LEX" \

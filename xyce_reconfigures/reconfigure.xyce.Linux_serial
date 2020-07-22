@@ -14,6 +14,7 @@ MYSYSTEM=`uname`
 $TOPDIR/Xyce/configure \
 --prefix=$TOPDIR/Xyce_Installs/${MYSYSTEM}_Serial \
 CXXFLAGS="-O3 -g -std=c++11 -Wl,-rpath,'\$\$ORIGIN/../lib'" \
+CFLAGS="-O3 -g" \
 CPPFLAGS="-I/usr/include/suitesparse" \
 ARCHDIR=$TOPDIR/XyceLibs/${MYSYSTEM}_serial \
 CXX="g++" CC="gcc" F77="gfortran" \

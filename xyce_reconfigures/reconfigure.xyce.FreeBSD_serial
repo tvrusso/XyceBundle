@@ -14,6 +14,7 @@ MYSYSTEM=`uname`
 $TOPDIR/Xyce/configure \
 --prefix=$TOPDIR/Xyce_Installs/${MYSYSTEM}_Serial \
 CXXFLAGS="-std=c++11 --stdlib=libc++ -O3 -pipe" \
+CFLAGS="-O3 -pipe" \
 LEX=/usr/local/bin/flex \
 LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib/gcc9" \
 CPPFLAGS="-I/usr/local/include -I/usr/local/include/flex " \
