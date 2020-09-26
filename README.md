@@ -140,21 +140,52 @@ by the value returned by running `uname` on your system.)
 Xyce and Xyce_Regression are generally updated on GitHub once a week,
 and you can use this repo to stay current.
 
-Simply run the command "git pull --recurse-submodules" in the top level
-directory of your clone, and all submodules should be fetched.  You should
-then do
+Simply run the command `git pull --recurse-submodules` in the top
+level directory of your clone, and all submodules should be fetched
+and updated.  Once they are, simply rerun `Build_And_Test_Xyce.sh` and
+the program will be rebuilt and tested.  If you have not deleted your
+previous build directory, only those files that have changed will be
+recompiled and the build should be faster than last time.  There are
+likely more tests than there were last time, because that's how the
+Xyce team rolls.
+
+### Updating when git doesn't cooperate
+
+We have found that some "long term support" operating systems (notably
+RHEL7) have versions of git that will download the commits from the
+submodules but will fail to update the checked out version to the
+correct state.  We are not entirely sure whether this is because the
+version of git is too old, but regardless it means that issuing the
+`git pull --recurse-submodles`` command does NOT put the XyceBundle
+checkout into the correct state to build the latest Xyce.  Should you
+find that your system is not updating the HEAD state of the submodules
+even though it is downloading all the updates, you can correct the
+matter with `git submodule update --force --checkout --recursive`.
+
+### Updating if I've spaced out
+
+While it is my intent to update the submodule information every time
+the Xyce project pushes a new batch of code and tests to GitHub, I
+might forget some week.  If that happens, `git pull
+--recurse-submodules` will not update HEAD *and* neither will the
+submodule update command above.  Should I forget some week and you
+really want the lastest version anyway, you can force the issue
+yourself.  Just do:
+
 ```
 for i in Xyce Xyce_Regression
 do
   pushd $i
-  git merge
+  git merge origin/master
   popd
 done
 ```
 
-This will assure that you will get the latest Xyce and
-Xyce_Regression, even if I've neglected to push the submodule update
-myself.
+This will assure that you will get the latest Xyce and Xyce_Regression
+even if I've neglected to push the submodule update myself.  (This is
+precisely what I do to update the XyceBundle project, only after I've
+done it I push the resulting changes of submodule state to the
+XyceBundle repo.)
 
 At this time, the Xyce team recommends a specific, somewhat old
 version of Trilinos, and this repo is set up to check that specific
