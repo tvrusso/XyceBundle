@@ -142,7 +142,7 @@ and you can use this repo to stay current.
 
 Simply run the command `git pull --recurse-submodules` in the top
 level directory of your clone, and all submodules should be fetched
-and updated.  Once they are, simply rerun `Build_And_Test_Xyce.sh` and
+and updated.  Once they are, simply rerun `Build_And_Test_Xyce` and
 the program will be rebuilt and tested.  If you have not deleted your
 previous build directory, only those files that have changed will be
 recompiled and the build should be faster than last time.  There are
