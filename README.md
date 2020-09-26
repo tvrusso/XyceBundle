@@ -156,7 +156,7 @@ RHEL7) have versions of git that will download the commits from the
 submodules but will fail to update the checked out version to the
 correct state.  We are not entirely sure whether this is because the
 version of git is too old, but regardless it means that issuing the
-`git pull --recurse-submodles`` command does NOT put the XyceBundle
+`git pull --recurse-submodles` command does NOT put the XyceBundle
 checkout into the correct state to build the latest Xyce.  Should you
 find that your system is not updating the HEAD state of the submodules
 even though it is downloading all the updates, you can correct the
