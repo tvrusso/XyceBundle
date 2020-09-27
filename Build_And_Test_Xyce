@@ -44,11 +44,13 @@ then
     cd Xyce_Builddir_`uname`_serial
     $TOPDIR/xyce_reconfigures/reconfigure.xyce.`uname`_serial $TOPDIR
     make -j${NUMPROC}
+    EXECUTABLE=`pwd`/src/Xyce
+    eval `$TOPDIR/Xyce_Regression/TestScripts/suggestXyceTagList.sh "$EXECUTABLE"`
     $TOPDIR/Xyce_Regression/TestScripts/run_xyce_regressionMP \
         --numproc=${NUMPROC} \
         --output=`pwd`/Xyce_Test --xyce_test=$TOPDIR/Xyce_Regression \
         --taglist="+serial+nightly?noverbose?klu-verbose?fft?cxx11" \
-        `pwd`/src/Xyce
+        $EXECUTABLE
 else
     echo "No reconfigure.xyce."`uname`"_serial  was found."
     echo "Please copy $TOPDIR/xyce_reconfigures/reconfigure.xyce.sample to $TOPDIR/xyce_reconfigures/reconfigure.xyce."`uname`"_serial"
