@@ -49,7 +49,7 @@ then
     $TOPDIR/Xyce_Regression/TestScripts/run_xyce_regressionMP \
         --numproc=${NUMPROC} \
         --output=`pwd`/Xyce_Test --xyce_test=$TOPDIR/Xyce_Regression \
-        --taglist="+serial+nightly?noverbose?klu-verbose?fft?cxx11" \
+        --taglist="$TAGLIST" \
         $EXECUTABLE
 else
     echo "No reconfigure.xyce."`uname`"_serial  was found."
