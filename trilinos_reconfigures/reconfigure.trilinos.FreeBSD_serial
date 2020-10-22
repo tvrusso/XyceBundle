@@ -47,8 +47,10 @@ cmake \
   -DTeuchos_ENABLE_COMPLEX=ON \
 -DTrilinos_ENABLE_Amesos=ON \
   -DAmesos_ENABLE_KLU=ON \
+-DTrilinos_ENABLE_Amesos2:BOOL=ON \
 -DTrilinos_ENABLE_Sacado=ON \
 -DTrilinos_ENABLE_Kokkos=ON \
+-DTrilinos_ENABLE_Stokhos=ON \
 -DTrilinos_ENABLE_CXX11=ON \
 -DTrilinos_ENABLE_ALL_OPTIONAL_PACKAGES=OFF \
 \

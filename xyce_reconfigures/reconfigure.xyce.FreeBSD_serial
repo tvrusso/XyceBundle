@@ -20,6 +20,7 @@ LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib/gcc9" \
 CPPFLAGS="-I/usr/local/include -I/usr/local/include/flex " \
 ARCHDIR=$TOPDIR/XyceLibs/${MYSYSTEM}_serial \
 CXX="c++" CC="cc" F77="gfortran9" \
+--enable-stokhos \
 --enable-shared \
 --enable-xyce-shareable
 

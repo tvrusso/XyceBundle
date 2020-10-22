@@ -50,6 +50,7 @@ LEX="$LEX" \
 BISON="$BISON" \
 ARCHDIR=$TOPDIR/XyceLibs/${MYSYSTEM}_serial \
 CXX="$CXX" CC="$CC" F77="$F77" \
+--enable-stokhos \
 --enable-shared \
 --enable-xyce-shareable
 

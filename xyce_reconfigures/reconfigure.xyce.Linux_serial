@@ -18,6 +18,7 @@ CFLAGS="-O3 -g" \
 CPPFLAGS="-I/usr/include/suitesparse" \
 ARCHDIR=$TOPDIR/XyceLibs/${MYSYSTEM}_serial \
 CXX="g++" CC="gcc" F77="gfortran" \
+--enable-stokhos \
 --enable-shared \
 --enable-xyce-shareable
 
