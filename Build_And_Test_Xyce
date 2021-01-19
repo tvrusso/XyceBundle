@@ -46,6 +46,7 @@ then
     make -j${NUMPROC}
     EXECUTABLE=`pwd`/src/Xyce
     eval `$TOPDIR/Xyce_Regression/TestScripts/suggestXyceTagList.sh "$EXECUTABLE"`
+    echo "Testing Xyce with taglist ${TAGLIST}"
     $TOPDIR/Xyce_Regression/TestScripts/run_xyce_regressionMP \
         --numproc=${NUMPROC} \
         --output=`pwd`/Xyce_Test --xyce_test=$TOPDIR/Xyce_Regression \
