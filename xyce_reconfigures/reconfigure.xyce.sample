@@ -27,6 +27,7 @@ CXXFLAGS="-O3 -g" \
 ARCHDIR=$TOPDIR/XyceLibs/${MYSYSTEM}_serial \
 CXX="g++9" CC="gcc9" F77="gfortran9" \
 --enable-stohkos \
+--enable-amesos2 \
 --enable-shared \
 --enable-xyce-shareable
 
