@@ -48,6 +48,12 @@ anything in this repo.
     for your system and test out the build with the Xyce regression suite.
 
 ## Customizing
+
+I have configurations here for Linux, Cygwin, FreeBSD and OS X (with
+MacPorts and Homebrew package managers).  These are all I have access
+to myself.  They have been tested on RHEL7, Ubuntu, FreeBSD 11.4, and
+several different versions of OS X.
+
 If your system is not one of the few that I have and have been able to add,
 you can add it yourself by copying the sample files I've provided.
 
