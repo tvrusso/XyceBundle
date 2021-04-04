@@ -1,11 +1,20 @@
 #!/bin/sh -e
 
+TOPDIR=`pwd`
+NUMPROC=8
 if [ $# -ge 1 ]
 then
-    TOPDIR=$1
-else
-    TOPDIR=`pwd`
+    NUMPROC=$1
+    if [ $# -ge 2 ]
+    then
+        TOPDIR=$2
+    fi
 fi
+
+echo "Script is set up to use $NUMPROC cores."
+echo "Press Control-C if this is more than your system has and edit NUMPROC or"
+echo "invoke this script again with a numeric argument to say how many cores to use"
+read -p "or hit ENTER to continue with the installation." FOOBAR
 
 if [ ! -e $TOPDIR/Build_And_Install_Trilinos ]
 then
@@ -15,27 +24,31 @@ then
     exit 1
 fi
 
-echo "This script will try to build and install Trilinos for your system,"
-echo "which uname reports as "`uname`
-
-NUMPROC=8
-
-echo "Script is set up to use $NUMPROC cores."
-echo "Press Control-C if this is more than your system has and edit NUMPROC to"
-read -p "something smaller; or, hit ENTER to continue with the installation." FOOBAR
-
-
-if [ -x $TOPDIR/trilinos_reconfigures/reconfigure.trilinos.`uname`_serial ]
+UNAME=`uname`
+# Cygwin has a version number in there that seems to be related more to
+# the Windows version than to Cygwin.  Just use CYGWIN_NT
+set +e
+echo $UNAME | grep CYGWIN_NT > /dev/null
+if [ $? = 0 ]
 then
-    mkdir -p Trilinos_Builddir_`uname`
-    cd Trilinos_Builddir_`uname`
-    $TOPDIR/trilinos_reconfigures/reconfigure.trilinos.`uname`_serial $TOPDIR
+    UNAME="CYGWIN_NT"
+fi
+set -e
+
+echo "This script will try to build and install Trilinos for your system,"
+echo "which uname reports as "${UNAME}
+
+if [ -x $TOPDIR/trilinos_reconfigures/reconfigure.trilinos.${UNAME}_serial ]
+then
+    mkdir -p Trilinos_Builddir_${UNAME}
+    cd Trilinos_Builddir_${UNAME}
+    $TOPDIR/trilinos_reconfigures/reconfigure.trilinos.${UNAME}_serial $TOPDIR
     make -j${NUMPROC}
     make install
 else
-    echo "No reconfigure.trilinos."`uname`"_serial  was found."
-    echo "Please copy reconfigure.trilinos.sample to reconfigure.trilinos."`uname`"_serial"
+    echo "No reconfigure.trilinos."${UNAME}"_serial  was found."
+    echo "Please copy reconfigure.trilinos.sample to reconfigure.trilinos."${UNAME}"_serial"
     echo ", customize it, make it executable with "
-    echo "        chmod u+x  reconfigure.trilinos."`uname`"_serial"
+    echo "        chmod u+x  reconfigure.trilinos."${UNAME}"_serial"
     echo "and try again."
 fi

@@ -105,14 +105,26 @@ Once a correct "reconfigure.trilinos." file is available, you can
 build Trilinos and install it by running the
 "Build_And_Install_Trilinos" script in the top level directory of this
 repo.  I recommend you do so simply by executing
-"./Build_And_Install_Trilinos" from the top level.  You may execute it
-elsewhere if you wish, but must then provide it a full path to the top
-level of the XyceBundle clone as the first command line argument.
+"./Build_And_Install_Trilinos" from the top level.
 
    - This script will create a build directory for Trilinos, run the
      appropriate reconfigure script, build Trilinos, and install it into
      a directory XyceLibs/UNAME_serial under the top XyceBundle directory.
 
+   - This script is set up to use 8 processors by default, because that's
+     what my main personal development machine has.  If you wish to run it
+     on a computer with fewer (or more) cores, you may either edit the script
+     and change "NUMPROC=8" to something else, or may invoke it with a
+     numeric argument to use a different number.
+
+   - The script is set up correctly to work with no arguments (or just one
+     argument with a processor count) if it is invoked in the top level
+     XyceBundle directory.
+
+     You may execute it elsewhere if you wish, but must then provide it
+     a full path to the top level of the XyceBundle clone as the second
+     command line argument, in which case you must also specify the processor
+     count as the first argument.
 
 ## Building Xyce
 
@@ -133,6 +145,27 @@ Build_And_Test_Xyce script does not do the install.  If you wish to
 install it, run `make install` from the build directory, which will be
 called Xyce_Builddir_UNAME_serial.  (Again, "UNAME" will be replaced
 by the value returned by running `uname` on your system.)
+
+As with Buld_and_Test_Trilinos:
+
+   - This script will create a build directory for Xyce, run the
+     appropriate reconfigure script, build Xyce, and run the full
+     Xyce regression suite.
+
+   - This script is set up to use 8 processors by default, because that's
+     what my main personal development machine has.  If you wish to run it
+     on a computer with fewer (or more) cores, you may either edit the script
+     and change "NUMPROC=8" to something else, or may invoke it with a
+     numeric argument to use a different number.
+
+   - The script is set up correctly to work with no arguments (or just one
+     argument with a processor count) if it is invoked in the top level
+     XyceBundle directory.
+
+     You may execute it elsewhere if you wish, but must then provide it
+     a full path to the top level of the XyceBundle clone as the second
+     command line argument, in which case you must also specify the processor
+     count as the first argument.
 
 
 ## Updating your bundle
