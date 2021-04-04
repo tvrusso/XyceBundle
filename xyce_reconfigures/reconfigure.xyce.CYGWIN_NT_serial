@@ -15,7 +15,5 @@ CXXFLAGS="-O3 -g -D_BSD_SOURCE -D_GNU_SOURCE" \
 ARCHDIR=$TOPDIR/XyceLibs/CYGWIN_NT_serial \
 CXX="g++" CC="gcc" F77="gfortran" \
 --enable-stokhos \
---enable-amesos2 \
---enable-shared \
---enable-xyce-shareable
+--enable-amesos2
 
