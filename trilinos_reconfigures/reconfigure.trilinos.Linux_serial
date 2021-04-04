@@ -45,7 +45,7 @@ cmake \
 -DTrilinos_ENABLE_Amesos=ON \
   -DAmesos_ENABLE_KLU=ON \
 -DTrilinos_ENABLE_Amesos2=ON \
-  -DAmesos2_ENABLE_KLU=ON \
+  -DAmesos2_ENABLE_KLU2=ON \
   -DAmesos2_ENABLE_Basker=ON \
 -DTrilinos_ENABLE_Sacado=ON \
 -DTrilinos_ENABLE_Kokkos=ON \
