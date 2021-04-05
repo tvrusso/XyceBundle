@@ -19,6 +19,7 @@ then
 fi
 
 UNAME=`uname`
+XTRATAGS=""
 # Cygwin has a version number in there that seems to be related more to
 # the Windows version than to Cygwin.  Just use CYGWIN_NT
 set +e
@@ -26,6 +27,7 @@ echo $UNAME | grep CYGWIN_NT > /dev/null
 if [ $? = 0 ]
 then
     UNAME="CYGWIN_NT"
+    XTRATAGS="-scipy"
 fi
 set -e
 
@@ -60,11 +62,11 @@ then
     make -j${NUMPROC}
     EXECUTABLE=`pwd`/src/Xyce
     eval `$TOPDIR/Xyce_Regression/TestScripts/suggestXyceTagList.sh "$EXECUTABLE"`
-    echo "Testing Xyce with taglist ${TAGLIST}"
+    echo "Testing Xyce with taglist ${TAGLIST}${XTRATAGS}"
     $TOPDIR/Xyce_Regression/TestScripts/run_xyce_regressionMP \
         --numproc=${NUMPROC} \
         --output=`pwd`/Xyce_Test --xyce_test=$TOPDIR/Xyce_Regression \
-        --taglist="$TAGLIST" \
+        --taglist="${TAGLIST}${XTRATAGS}" \
         $EXECUTABLE
 else
     echo "No reconfigure.xyce."${UNAME}"_serial  was found."
