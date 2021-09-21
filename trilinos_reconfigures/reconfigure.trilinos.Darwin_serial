@@ -56,7 +56,7 @@ cmake \
 -DCMAKE_MAKE_PROGRAM="make" \
 \
 -DTrilinos_ENABLE_NOX=ON \
--DTrilinos_ENABLE_LOCA=ON \
+  -DNOX_ENABLE_LOCA=ON \
 -DTrilinos_ENABLE_EpetraExt=ON \
 -DEpetraExt_BUILD_BTF=ON \
 -DEpetraExt_BUILD_EXPERIMENTAL=ON \
