@@ -13,8 +13,10 @@ fi
 if [ ! -e $TOPDIR/Build_And_Install_Trilinos ]
 then
     echo "Cannot find Build_And_Install_Trilinos in $TOPDIR.  Please either"
-    echo "run this script from the directory in which it exists, or provide"
-    echo "the path to your XyceBundle clone as the first argument."
+    echo "run this script from the directory in which it exists, or run this"
+    echo "script with two arguments, with the number of cores to use as the"
+    echo "first argument and the path to your XyceBundle clone as the second"
+    echo "argument."
     exit 1
 fi
 
