@@ -4,7 +4,7 @@ The purpose of this repo is to simplify the process of building Xyce
 from source.  It provides Trilinos, Xyce, and the Xyce regression
 suite as submodules, and contains some scripts that implement the
 process described in the Xyce&trade; building guide at
-https://xyce.sandia.gov/documentation/BuildingGuide.html.
+https://xyce.sandia.gov/documentation-tutorials/building-guide/.
 
 This is not ready to go out of the box for every operating system.  I am
 trying to collect up system-specific configurations as much as possible, but
@@ -26,7 +26,7 @@ system package management repositories on all of the systems we have
 tried to use.
 
 Please see the
-[Xyce Building Guide](https://xyce.sandia.gov/documentation/BuildingGuide.html)
+[Xyce Building Guide](https://xyce.sandia.gov/documentation-tutorials/building-guide/)
 for system-specific guidance on what packages to install before trying to run
 anything in this repo.
 
