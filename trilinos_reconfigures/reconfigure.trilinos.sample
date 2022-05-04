@@ -54,7 +54,7 @@ cmake \
 -DTrilinos_ENABLE_AztecOO=ON \
 -DTrilinos_ENABLE_Belos=ON \
 -DTrilinos_ENABLE_Teuchos=ON \
-  -DTeuchos_ENABLE_COMPLEX=ON \
+-DTrilinos_ENABLE_COMPLEX_DOUBLE=ON \
 -DTrilinos_ENABLE_Amesos=ON \
   -DAmesos_ENABLE_KLU=ON \
 -DTrilinos_ENABLE_Amesos2=ON \
