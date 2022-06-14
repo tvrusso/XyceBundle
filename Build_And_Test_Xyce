@@ -68,6 +68,7 @@ then
     $TOPDIR/Xyce_Regression/TestScripts/run_xyce_regressionMP \
         --numproc=${NUMPROC} \
         --output=`pwd`/Xyce_Test --xyce_test=$TOPDIR/Xyce_Regression \
+        --resultfile=`pwd`/regr_results_all \
         --taglist="${TAGLIST}${XTRATAGS}" \
         $EXECUTABLE
 else
