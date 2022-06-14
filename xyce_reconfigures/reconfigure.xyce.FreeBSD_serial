@@ -13,8 +13,8 @@ MYSYSTEM=`uname`
 
 $TOPDIR/Xyce/configure \
 --prefix=$TOPDIR/Xyce_Installs/${MYSYSTEM}_Serial \
-CXXFLAGS="-O3 -pipe" \
-CFLAGS="-O3 -pipe" \
+CXXFLAGS="-O3 -pipe -Qunused-arguments" \
+CFLAGS="-O3 -pipe -Qunused-arguments" \
 LEX=/usr/local/bin/flex \
 LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib/gcc10" \
 CPPFLAGS="-I/usr/local/include -I/usr/local/include/flex " \
