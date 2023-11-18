@@ -24,7 +24,7 @@ cmake \
 \
 -DCMAKE_C_COMPILER=cc \
 -DCMAKE_CXX_COMPILER=c++ \
--DCMAKE_Fortran_COMPILER=gfortran10 \
+-DCMAKE_Fortran_COMPILER=gfortran12 \
 \
 -DCMAKE_CXX_FLAGS="$FLAGS" \
 -DCMAKE_C_FLAGS="$FLAGS" \

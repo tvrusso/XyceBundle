@@ -16,10 +16,10 @@ $TOPDIR/Xyce/configure \
 CXXFLAGS="-O3 -pipe -Qunused-arguments" \
 CFLAGS="-O3 -pipe -Qunused-arguments" \
 LEX=/usr/local/bin/flex \
-LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib/gcc10" \
+LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib/gcc12" \
 CPPFLAGS="-I/usr/local/include -I/usr/local/include/flex " \
 ARCHDIR=$TOPDIR/XyceLibs/${MYSYSTEM}_serial \
-CXX="c++" CC="cc" F77="gfortran10" \
+CXX="c++" CC="cc" F77="gfortran12" \
 --enable-stokhos \
 --enable-amesos2 \
 --enable-shared \
