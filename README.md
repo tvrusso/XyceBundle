@@ -30,6 +30,11 @@ Please see the
 for system-specific guidance on what packages to install before trying to run
 anything in this repo.
 
+If you are on one of the systems I've already set up here, *and* you
+have installed all of the prerequisite packages from your system's
+package management repository, then getting a working version of Xyce
+is a one step process with this metarepo.
+
 ## Using this repo
 
   * Clone the repo from GitHub using `git clone --recurse-submodules` and
@@ -41,18 +46,47 @@ anything in this repo.
     this repo, get the submodules now with `git submodule update
     --init --recursive`.
 
-  * If I haven't provided a system-specific configuration for your system,
-    you'll have to customize the samples I have provided.
+  * *If your system is NOT Linux, FreeBSD, Cygwin, or MacOS,*
+    you'll have to customize the samples I have provided.  Otherwise
+    no customization is necessary.
+
+  * Install all the prerequisite packages Xyce and Trilinos need.
+    These are enumerated in the [Xyce Building
+    Guide](https://xyce.sandia.gov/documentation-tutorials/building-guide/),
+    complete with the exact list of packages needed on all of the
+    platforms the Xyce team has tested it on.
 
   * Run the "Build_And_Test_Xyce" script, which should build Trilinos and Xyce
     for your system and test out the build with the Xyce regression suite.
 
+  * The result of this will be a working version of Xyce in its build
+    directory `Xyce_Builddir_UNAME_serial` under the XyceBundle
+    directory itself (where "UNAME" is the system name obtained from
+    the `uname` utility).  You can use it from there if you like (Xyce
+    itself will be in the `src` subdirectory), or you can install it
+    into a local directory:
+
+        cd XyceBundle/Xyce_Builddir_UNAME_serial
+        make install
+
+    The build was done with a prefix that places the installed copy
+    within the XyceBundle tree, so you do not need to `sudo` for this
+    operation.  The code will be installed as
+    `XyceBundle/Xyce_Installs/UNAME_Serial/bin/Xyce`
+
+    The choice of installing to a directory inside the XyceBundle
+    tree can be changed by editing the setting of `--prefix` in the
+    `reconfigure.xyce.UNAME_serial` file associated with your system.
+    This is found in the `xyce_reconfigures` directory.
+
 ## Customizing
 
 I have configurations here for Linux, Cygwin, FreeBSD and OS X (with
-MacPorts and Homebrew package managers).  These are all I have access
-to myself.  They have been tested on RHEL7, Ubuntu, FreeBSD 11.4,
-FreeBSD 12.2, and several different versions of OS X.
+MacPorts and Homebrew package managers).  These are all I had access
+to myself when I created this repo, though all I have access to now
+are Ubuntu Linux and FreeBSD.  These configurations have been tested
+on RHEL7, Ubuntu 22.04, FreeBSD 12.4, FreeBSD 13.2, and several
+different versions of OS X.
 
 If your system is not one of the few that I have and have been able to add,
 you can add it yourself by copying the sample files I've provided.
