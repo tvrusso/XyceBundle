@@ -24,4 +24,3 @@ CXX="c++" CC="cc" F77="gfortran12" \
 --enable-amesos2 \
 --enable-shared \
 --enable-xyce-shareable
-

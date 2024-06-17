@@ -1,6 +1,18 @@
 #!/bin/sh -e
 TOPDIR=`pwd`
 NUMPROC=8
+PARALLEL_OPT=""
+s_or_p="serial"
+S_OR_P="Serial"
+
+if [ $# -ge 1 -a $1 = "--parallel" ]
+then
+    PARALLEL_OPT=$1
+    s_or_p="parallel"
+    S_OR_P="Parallel"
+    shift
+fi
+
 if [ $# -ge 1 ]
 then
     NUMPROC=$1
@@ -41,8 +53,13 @@ echo "Press Control-C if this is more than your system has and edit NUMPROC or"
 echo "invoke this script again with a numeric argument to say how many cores to use"
 read -p "or hit ENTER to continue with the installation." FOOBAR
 
+MPIRUN="mpirun"
+if [ ${UNAME} = "FreeBSD" ]
+then
+    MPIRUN="/usr/local/mpi/openmpi/bin/mpirun"
+fi
 
-if [ ! -e $TOPDIR/XyceLibs/${UNAME}_serial ]
+if [ ! -e $TOPDIR/XyceLibs/${UNAME}_${s_or_p} ]
 then
    echo "Cannot find directory of Trilinos libraries.  Building those."
    $TOPDIR/Build_And_Install_Trilinos $NUMPROC $TOPDIR
@@ -56,25 +73,32 @@ fi
     echo "Bootstrap done."
 
 
-if [ -x $TOPDIR/xyce_reconfigures/reconfigure.xyce.${UNAME}_serial ]
+if [ -x $TOPDIR/xyce_reconfigures/reconfigure.xyce.${UNAME}_${s_or_p} ]
 then
-    mkdir -p Xyce_Builddir_${UNAME}_serial
-    cd Xyce_Builddir_${UNAME}_serial
-    $TOPDIR/xyce_reconfigures/reconfigure.xyce.${UNAME}_serial $TOPDIR
+    mkdir -p Xyce_Builddir_${UNAME}_${s_or_p}
+    cd Xyce_Builddir_${UNAME}_${s_or_p}
+    $TOPDIR/xyce_reconfigures/reconfigure.xyce.${UNAME}_${s_or_p} $TOPDIR
     make -j${NUMPROC} install
-    EXECUTABLE=`pwd`/../Xyce_Installs/${UNAME}_Serial/bin/Xyce
+    EXECUTABLE=`pwd`/../Xyce_Installs/${UNAME}_${S_OR_P}/bin/Xyce
+    XYCECMD=$EXECUTABLE
     eval `$TOPDIR/Xyce_Regression/TestScripts/suggestXyceTagList.sh "$EXECUTABLE"`
-    echo "Testing Xyce with taglist ${TAGLIST}${XTRATAGS}"
+    if [ "${s_or_p}" = "parallel" ]
+    then
+	XYCECMD="${MPIRUN} -np 2 --bind-to none $EXECUTABLE"
+	NUMPROC=`echo $NUMPROC/2 | bc`
+    fi
+
+    echo "Testing ${s_or_p} Xyce in groups of ${NUMPROC} with taglist ${TAGLIST}${XTRATAGS}"
     $TOPDIR/Xyce_Regression/TestScripts/run_xyce_regressionMP \
         --numproc=${NUMPROC} \
         --output=`pwd`/Xyce_Test --xyce_test=$TOPDIR/Xyce_Regression \
         --resultfile=`pwd`/regr_results_all \
         --taglist="${TAGLIST}${XTRATAGS}" \
-        $EXECUTABLE
+        "$XYCECMD"
 else
-    echo "No reconfigure.xyce."${UNAME}"_serial  was found."
-    echo "Please copy $TOPDIR/xyce_reconfigures/reconfigure.xyce.sample to $TOPDIR/xyce_reconfigures/reconfigure.xyce."${UNAME}"_serial"
+    echo "No reconfigure.xyce."${UNAME}"_${s_or_p}  was found."
+    echo "Please copy $TOPDIR/xyce_reconfigures/reconfigure.xyce.sample to $TOPDIR/xyce_reconfigures/reconfigure.xyce."${UNAME}"_${s_or_p}"
     echo ", customize it, make it executable with "
-    echo "        chmod u+x  $TOPDIR/xyce_reconfigures/reconfigure.xyce."${UNAME}"_serial"
+    echo "        chmod u+x  $TOPDIR/xyce_reconfigures/reconfigure.xyce."${UNAME}"_${s_or_p}"
     echo "and try again."
 fi

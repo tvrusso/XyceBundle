@@ -2,6 +2,14 @@
 
 TOPDIR=`pwd`
 NUMPROC=8
+s_or_p="serial"
+S_OR_P="Serial"
+if [ $# -ge 1 -a $1 = "--parallel" ]
+then
+    s_or_p="parallel"
+    S_OR_P="Parallel"
+    shift
+fi
 if [ $# -ge 1 ]
 then
     NUMPROC=$1
@@ -40,17 +48,17 @@ set -e
 echo "This script will try to build and install Trilinos for your system,"
 echo "which uname reports as "${UNAME}
 
-if [ -x $TOPDIR/trilinos_reconfigures/reconfigure.trilinos.${UNAME}_serial ]
+if [ -x $TOPDIR/trilinos_reconfigures/reconfigure.trilinos.${UNAME}_${s_or_p} ]
 then
-    mkdir -p Trilinos_Builddir_${UNAME}
-    cd Trilinos_Builddir_${UNAME}
-    $TOPDIR/trilinos_reconfigures/reconfigure.trilinos.${UNAME}_serial $TOPDIR
+    mkdir -p Trilinos_Builddir_${UNAME}_${s_or_p}
+    cd Trilinos_Builddir_${UNAME}_${s_or_p}
+    $TOPDIR/trilinos_reconfigures/reconfigure.trilinos.${UNAME}_${s_or_p} $TOPDIR
     make -j${NUMPROC}
     make install
 else
-    echo "No reconfigure.trilinos."${UNAME}"_serial  was found."
-    echo "Please copy reconfigure.trilinos.sample to reconfigure.trilinos."${UNAME}"_serial"
+    echo "No reconfigure.trilinos."${UNAME}"_${s_or_p}  was found."
+    echo "Please copy reconfigure.trilinos.sample to reconfigure.trilinos."${UNAME}"_${s_or_p}"
     echo ", customize it, make it executable with "
-    echo "        chmod u+x  reconfigure.trilinos."${UNAME}"_serial"
+    echo "        chmod u+x  reconfigure.trilinos."${UNAME}"_${s_or_p}"
     echo "and try again."
 fi
