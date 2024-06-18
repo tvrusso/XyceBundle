@@ -14,8 +14,10 @@ provided with instructions on how to customize them.
 This is not a replacement for the building guide, but should provide a
 framework for following the directions in that guide more easily.
 
-At the moment, I'm providing only example serial builds, but this will
-change eventually as I iron out the wrinkles in the process.
+For Linux and FreeBSD, you can also try out a parallel build by adding
+"--parallel" as the first argument to either `Build_And_Test_Xyce` or
+`Test_Installed_Xyce`.  This feature is brand new and I have not
+updated all of the discussion below to reflect it.
 
 ## What this repo will NOT do for you
 
